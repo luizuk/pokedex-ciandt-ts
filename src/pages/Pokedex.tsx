@@ -1,18 +1,51 @@
-import { Box, Center, Flex, Square, Text } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Flex, Text } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
+import SearchBar from '../components/Core/SearchBar'
+import axios from 'axios'
 
 const Pokedex = () => {
+  const [firstTwenty, setFirstTwenty] = useState([])
+  const [pokemonName, setPokemonName] = useState("")
+  const [pokemonData, setPokemonData] = useState(null)
+
+
+  async function getPokemonByName() {
+    const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+    setPokemonData(res.data)
+  }
+
   return (
-    <Flex color='white'>
-      <Center w='100px' bg='green.500'>
-        <Text>Box 1</Text>
-      </Center>
-      <Square bg='blue.500' size='150px'>
-        <Text>Box 2</Text>
-      </Square>
-      <Box flex='1' bg='tomato'>
-        <Text>Box 3</Text>
+    <Flex
+      height={'100vh'}
+      bg='black'
+      padding={2}
+      flexDirection={['column', 'column', 'row']}
+    >
+      <Box
+        w={'100%'}
+        flexDirection={'column'}
+      >
+        <Text
+          fontSize={'lg'}
+          fontWeight={'bold'}
+        >Find a pokemon by name:</Text>
+        <SearchBar
+          liftSearchText={(text: string) => setPokemonName(text)}
+          onClick={() => getPokemonByName()}
+        />
       </Box>
+
+      {/* <Box
+        w={['100%', '100%', '49%']}
+        height={"50px"}
+        bg={'red.800'}
+        rounded={'md'}
+        alignItems={'center'}
+        p={1}
+      >
+        Filters menu
+      </Box> */}
+
     </Flex>
   )
 }
