@@ -1,12 +1,23 @@
+
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Favorites from "../pages/Favorites";
 import Pokedex from "../pages/Pokedex";
 import SpecificPokemon from "../pages/SpecificPokemon";
 
-export const pokedexRoutes = [
+const pokedexRoutes = [
   {
     title: "Pokedex",
     pageName: "Pokedex",
     path: "/",
     element: <Pokedex />,
+    private: false,
+  },
+  {
+    title: "Favorites",
+    pageName: "Favorites",
+    path: "/favorites",
+    element: <Favorites />,
     private: false,
   },
   {
@@ -17,3 +28,19 @@ export const pokedexRoutes = [
     private: false,
   },
 ];
+
+
+
+const AllRoutes = () => {
+  return (
+    <Router>
+      <Routes>
+        {pokedexRoutes.map((route, key) => {
+          return <Route key={key} path={route.path} element={route.element} />;
+        })}
+      </Routes>
+    </Router>
+  )
+}
+
+export default AllRoutes

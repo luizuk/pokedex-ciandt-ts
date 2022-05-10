@@ -1,18 +1,13 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { pokedexRoutes } from "./navigation/routes";
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react';
 import { theme } from "./global/theme";
+import AllRoutes from "./navigation/routes";
+import Navbar from "./components/Navigation/Navbar"
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Router>
-        <Routes>
-          {pokedexRoutes.map((route, key) => {
-            return <Route key={key} path={route.path} element={route.element} />;
-          })}
-        </Routes>
-      </Router>
+      <Navbar />
+      <AllRoutes />
     </ChakraProvider>
   );
 }
