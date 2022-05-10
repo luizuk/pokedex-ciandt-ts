@@ -1,37 +1,10 @@
-// import { Flex } from '@chakra-ui/react'
-// import React from 'react'
-// import MenuMobile from './MenuMobile'
-
-// const Navbar = () => {
-//   return (
-//     <Flex w={'100%'} h={'60px'} bg={'red.800'} alignItems={'center'} paddingX={'2rem'} >
-//       <MenuMobile />
-//     </Flex>
-//   )
-// }
-
-// export default Navbar
-
-
-import { ReactNode } from 'react';
+import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import {
   Box,
-  Flex,
-  Avatar,
-  HStack,
-  Link,
-  IconButton,
-  Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  useDisclosure,
-  useColorModeValue,
-  Stack,
+  Flex, HStack, IconButton, Link, Stack,
+  Text, useColorModeValue, useDisclosure
 } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { ReactNode } from 'react';
 import Logo from '../Core/Logo';
 
 const Links = [
@@ -55,6 +28,7 @@ const NavLink = ({ children, href }: NavlinkProps) => (
   <Link
     px={2}
     py={1}
+    flexDirection='row'
     rounded={'md'}
     _hover={{
       textDecoration: 'none',
@@ -70,19 +44,19 @@ export default function Simple() {
 
   return (
     <>
-      <Box bg={useColorModeValue('gray.100', 'red.800')} px={4}>
+      <Box bg={useColorModeValue('gray.100', 'red.800')}>
         <Flex h={20} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
+            ml={4}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={'Open Menu'}
             display={{ md: 'none' }}
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={'center'}>
-            <Box bg={'red.400'}>
-              <Logo />
-            </Box>
+            <Logo />
+
             <HStack
               as={'nav'}
               spacing={4}
@@ -123,14 +97,18 @@ export default function Simple() {
         </Flex>
 
         {isOpen ? (
-          <Box pb={4} display={{ md: 'none' }}>
+          <Box m={0} p={4} display={{ md: 'none' }} bg={'red.500'}>
             <Stack as={'nav'} spacing={4}>
               {Links.map((link) => (
                 <NavLink
                   key={link.name}
                   href={link.href}
                 >
-                  {link.name}
+                  <Text
+                    fontWeight={'bold'}
+                  >
+                    {link.name}
+                  </Text>
                 </NavLink>
               ))}
             </Stack>
