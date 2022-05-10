@@ -1,22 +1,53 @@
-import { Box, Flex, Text } from '@chakra-ui/react'
+
+
+import { Box, Button, Flex, SimpleGrid, Text, useEditable } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import SearchBar from '../components/Core/SearchBar'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const Pokedex = () => {
   const [firstTwenty, setFirstTwenty] = useState([])
   const [pokemonName, setPokemonName] = useState("")
-  const [pokemonData, setPokemonData] = useState(null)
+  const [pokemonData, setPokemonData] = useState([])
+  const [auxData, setAuxData] = useState([])
+  const [limit, setLimit] = useState(1126)
+  const [offset, setOffset] = useState(0)
 
 
-  async function getPokemonByName() {
-    const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-    setPokemonData(res.data)
-  }
+
+  useEffect(() => {
+    const getAllPokemons = async () => {
+      const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`)
+      setPokemonData(res.data.results)
+      setAuxData(res.data.results)
+    }
+
+    getAllPokemons()
+  }, [])
+
+  console.log('pokemonName', pokemonName)
+
+
+  useEffect(() => {
+    if (pokemonName === '') {
+      setPokemonData(auxData)
+    } else {
+      setPokemonData(
+        pokemonData.filter((pokemon: any) => {
+          if (pokemon.name.toLowerCase().indexOf(pokemonName.toLowerCase()) > -1) {
+            return true
+          }
+          else {
+            return false
+          }
+        })
+      )
+    }
+  }, [pokemonName])
 
   return (
     <Flex
-      height={'100vh'}
       bg='black'
       padding={2}
       flexDirection={['column', 'column', 'row']}
@@ -26,13 +57,39 @@ const Pokedex = () => {
         flexDirection={'column'}
       >
         <Text
-          fontSize={'lg'}
+          fontSize={'2xl'}
           fontWeight={'bold'}
-        >Find a pokemon by name:</Text>
+          marginY={2}
+        >
+          Quick search by name
+        </Text>
         <SearchBar
           liftSearchText={(text: string) => setPokemonName(text)}
-          onClick={() => getPokemonByName()}
+        // onClick={() => getPokemonByName()}
         />
+
+        <SimpleGrid columns={[1, 2, 3]} spacing='20px' mt={2} >
+          {
+            pokemonData.map((pokemon: { name: string, url: string }, index: number) => (
+              <Link
+                to={`/${pokemon.name}`}
+                state={{ url: pokemon.url }}
+              >
+                <Flex
+                  bg='red.700'
+                  height={'60px'}
+                  justifyContent={'center'}
+                  alignItems={'center'}
+                >
+                  <Text textAlign={'center'} fontSize={'1.5rem'}>
+                    {pokemon.name}
+                  </Text>
+                </Flex>
+              </Link>
+            ))
+          }
+        </SimpleGrid>
+
       </Box>
 
       {/* <Box
@@ -46,7 +103,7 @@ const Pokedex = () => {
         Filters menu
       </Box> */}
 
-    </Flex>
+    </Flex >
   )
 }
 
