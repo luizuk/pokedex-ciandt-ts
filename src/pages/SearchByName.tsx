@@ -62,6 +62,7 @@ const SearchByName = () => {
               <Link
                 to={`/${pokemon.name}`}
                 state={{ url: pokemon.url }}
+                key={index}
               >
                 <Flex
                   bg='red.700'

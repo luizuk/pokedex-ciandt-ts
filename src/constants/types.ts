@@ -10,5 +10,5 @@ export interface RouteTypes extends Array<RouteTypes> {
 
 
 export interface IUseData {
-  setAllPokemon: (data?: any) => void;
+  setAllPokemons: (data?: any) => void;
 }
