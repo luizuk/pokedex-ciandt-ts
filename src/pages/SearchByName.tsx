@@ -1,40 +1,23 @@
 
 
-import { Box, Button, Flex, SimpleGrid, Text, useEditable } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
-import SearchBar from '../components/Core/SearchBar'
-import axios from 'axios'
+import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import SearchBar from '../components/Core/SearchBar'
+import { DataContext } from '../contexts/DataProvider'
 
-const Pokedex = () => {
-  const [firstTwenty, setFirstTwenty] = useState([])
+const SearchByName = () => {
+  const { allPokemons, setAllPokemons, allPokemonsAux }: any = useContext(DataContext)
+
+  console.log('allPokemonsAux', allPokemonsAux)
   const [pokemonName, setPokemonName] = useState("")
-  const [pokemonData, setPokemonData] = useState([])
-  const [auxData, setAuxData] = useState([])
-  const [limit, setLimit] = useState(1126)
-  const [offset, setOffset] = useState(0)
-
-
-
-  useEffect(() => {
-    const getAllPokemons = async () => {
-      const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`)
-      setPokemonData(res.data.results)
-      setAuxData(res.data.results)
-    }
-
-    getAllPokemons()
-  }, [])
-
-  console.log('pokemonName', pokemonName)
-
 
   useEffect(() => {
     if (pokemonName === '') {
-      setPokemonData(auxData)
+      setAllPokemons(allPokemonsAux)
     } else {
-      setPokemonData(
-        pokemonData.filter((pokemon: any) => {
+      setAllPokemons(
+        allPokemons.filter((pokemon: any) => {
           if (pokemon.name.toLowerCase().indexOf(pokemonName.toLowerCase()) > -1) {
             return true
           }
@@ -45,6 +28,10 @@ const Pokedex = () => {
       )
     }
   }, [pokemonName])
+
+  // if (!pokemonData) return null
+  // console.log('pokemonData', pokemonData)
+
 
   return (
     <Flex
@@ -70,7 +57,8 @@ const Pokedex = () => {
 
         <SimpleGrid columns={[1, 2, 3]} spacing='20px' mt={2} >
           {
-            pokemonData.map((pokemon: { name: string, url: string }, index: number) => (
+
+            allPokemons.map((pokemon: { name: string, url: string }, index: number) => (
               <Link
                 to={`/${pokemon.name}`}
                 state={{ url: pokemon.url }}
@@ -107,4 +95,4 @@ const Pokedex = () => {
   )
 }
 
-export default Pokedex
+export default SearchByName

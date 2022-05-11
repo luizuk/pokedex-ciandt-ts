@@ -7,16 +7,8 @@ import {
 import { ReactNode } from 'react';
 import Logo from '../Core/Logo';
 
-const Links = [
-  {
-    name: 'Pokemons',
-    href: '/',
-  },
-  {
-    name: 'Favoritos',
-    href: '/favorites',
-  }
-];
+
+
 
 interface NavlinkProps {
   children: ReactNode,
@@ -41,6 +33,28 @@ const NavLink = ({ children, href }: NavlinkProps) => (
 
 export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+
+  const Links = [
+    {
+      name: 'Home',
+      href: '/',
+    },
+    {
+      name: 'SearchByName',
+      href: '/search',
+    },
+    {
+      name: 'Filters',
+      href: '/filters',
+    },
+    {
+      name: 'Favorites',
+      href: '/favorites',
+    }
+  ];
+
+
 
   return (
     <>

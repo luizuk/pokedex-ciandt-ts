@@ -2,15 +2,32 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Favorites from "../pages/Favorites";
-import Pokedex from "../pages/Pokedex";
+import Filters from '../pages/Filters';
+import Home from '../pages/Home';
+import SearchByName from '../pages/SearchByName';
 import SpecificPokemon from "../pages/SpecificPokemon";
+
 
 const pokedexRoutes = [
   {
-    title: "Pokedex",
-    pageName: "Pokedex",
+    title: "Home",
+    pageName: "Home",
     path: "/",
-    element: <Pokedex />,
+    element: <Home />,
+    private: false,
+  },
+  {
+    title: "Quick Search (Name)",
+    pageName: "SearchByName",
+    path: "/search",
+    element: <SearchByName />,
+    private: false,
+  },
+  {
+    title: "Filters",
+    pageName: "Filters",
+    path: "/filters",
+    element: <Filters />,
     private: false,
   },
   {
