@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const Filters = () => {
   const [pokeTypeUrl, setPokeTypeUrl] = useState("")
-  const [foundedPokemons, setFoundedPokemons] = useState([])
+  const [foundPokemons, setFoundPokemons] = useState([])
   const [pokemonTypes, setPokemonTypes] = useState([])
 
 
@@ -22,7 +22,7 @@ const Filters = () => {
 
   const getPokemonsByType = async () => {
     const res: any = await axios.get(pokeTypeUrl)
-    setFoundedPokemons(res.data.pokemon)
+    setFoundPokemons(res.data.pokemon)
   }
 
   if (!pokemonTypes) return null
@@ -64,7 +64,7 @@ const Filters = () => {
 
 
       {
-        (foundedPokemons.length > 0) &&
+        (foundPokemons.length > 0) &&
         <Box
           w={'100%'}
           bg={'gray.900'}
@@ -76,12 +76,12 @@ const Filters = () => {
             fontSize={22}
             mb={2}
           >
-            Founded pokemons:
+            Found pokemons:
           </Text>
 
           <SimpleGrid columns={[1, 2, 3]} spacing='20px' mt={2} >
             {
-              foundedPokemons.map((pokemon: any, index: number) => (
+              foundPokemons.map((pokemon: any, index: number) => (
                 <Link
                   to={`/${pokemon.pokemon.name}`}
                   state={{ url: pokemon.pokemon.url }}
