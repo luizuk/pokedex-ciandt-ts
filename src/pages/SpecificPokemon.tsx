@@ -120,18 +120,18 @@ const SpecificPokemon = () => {
             specificPokemonData.stats.map((stats: any, index: number) => (
               <Flex
                 key={index}
-                w={'120px'}
-                h={'120px'}
+                w={['70px', '100px', '120px']}
+                h={['70px', '100px', '120px']}
                 bg={'purple.700'}
                 rounded={'lg'}
                 alignItems={'center'}
-                justifyContent={'flex-end'}
-                paddingY={5}
+                justifyContent={'center'}
+                padding={5}
                 flexDirection={'column'}
               >
                 <Text
                   textAlign={'center'}
-                  fontSize={18}
+                  fontSize={[12, 16, 18]}
                   fontWeight={'bold'}
                   color={'yellow.400'}
                 >
@@ -140,7 +140,7 @@ const SpecificPokemon = () => {
 
                 <Text
                   textAlign={'center'}
-                  fontSize={26}
+                  fontSize={[18, 22, 26]}
                   fontWeight={'bold'}
                 >
                   {stats.base_stat}
