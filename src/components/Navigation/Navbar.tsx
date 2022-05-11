@@ -1,13 +1,13 @@
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import {
+  Avatar,
   Box,
-  Flex, HStack, IconButton, Link, Stack,
+  Button,
+  Flex, HStack, IconButton, Link, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Stack,
   Text, useColorModeValue, useDisclosure
 } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import Logo from '../Core/Logo';
-
-
 
 
 interface NavlinkProps {
@@ -85,8 +85,8 @@ export default function Simple() {
               ))}
             </HStack>
           </HStack>
-          <Flex alignItems={'center'}>
-            {/* <Menu>
+          <Flex alignItems={'center'} mr={4} >
+            <Menu>
               <MenuButton
                 as={Button}
                 rounded={'full'}
@@ -101,12 +101,18 @@ export default function Simple() {
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
+                <MenuItem>
+                  <Link
+                    href={'https://github.com/luizuk'}
+                  >
+                    Luiz Paulo
+                  </Link>
+                </MenuItem>
+                <MenuItem>Settings</MenuItem>
                 <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
+                <MenuItem>Leave PokeDéx</MenuItem>
               </MenuList>
-            </Menu> */}
+            </Menu>
           </Flex>
         </Flex>
 
