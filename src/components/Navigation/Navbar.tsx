@@ -59,7 +59,7 @@ export default function Simple() {
   return (
     <>
       <Box bg={useColorModeValue('gray.100', 'red.800')}>
-        <Flex h={20} alignItems={'center'} justifyContent={'space-between'}>
+        <Flex h={28} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
             ml={4}
@@ -94,7 +94,7 @@ export default function Simple() {
                 cursor={'pointer'}
                 minW={0}>
                 <Avatar
-                  size={'sm'}
+                  size={'md'}
                   src={
                     'https://github.com/luizuk.png'
                   }
