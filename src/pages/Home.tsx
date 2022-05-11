@@ -1,12 +1,33 @@
-import { Box, Button, SimpleGrid, Text } from '@chakra-ui/react'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Box, Button, Text } from '@chakra-ui/react'
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { DataContext } from '../contexts/DataProvider'
+
+
 
 const Home = () => {
   const { allPokemons }: any = useContext(DataContext)
 
   console.log("allPokemons", allPokemons)
+
+
+  const links: { to: string, title: string }[] = [
+    {
+      to: '/search',
+      title: 'Search by Name'
+    },
+    {
+      to: '/filters',
+      title: 'Filters'
+    },
+    {
+      to: '/favorites',
+      title: 'Favorite Pokemons'
+    },
+  ]
+
+
   return (
     <Box
       width={'100%'}
@@ -14,50 +35,25 @@ const Home = () => {
       p={2}
       justifyContent={'center'}
     >
-      <Link
-        to={'/search'}
-      >
-        <Button
-          colorScheme={'facebook'}
-          mr={2}
-        >
-          <Text
-            textAlign={'center'}
+      {
+        links.map((link, index) => (
+          <Link
+            to={link.to}
           >
-            Search By Name
-          </Text>
-        </Button>
-      </Link>
+            <Button
+              colorScheme={'facebook'}
+              mr={2}
+            >
+              <Text
+                textAlign={'center'}
+              >
+                {link.title}
+              </Text>
+            </Button>
+          </Link>
+        ))
+      }
 
-      <Link
-        to={'/filters'}
-      >
-        <Button
-          colorScheme={'facebook'}
-          mr={2}
-        >
-          <Text
-            textAlign={'center'}
-          >
-            Filters
-          </Text>
-        </Button>
-      </Link>
-
-
-      <Link
-        to={'/favorites'}
-      >
-        <Button
-          colorScheme={'facebook'}
-        >
-          <Text
-            textAlign={'center'}
-          >
-            Favorites
-          </Text>
-        </Button>
-      </Link>
     </Box>
   )
 }
