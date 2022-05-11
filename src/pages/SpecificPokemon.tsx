@@ -25,11 +25,11 @@ const SpecificPokemon = () => {
     getSpecificPokemon()
   }, [])
 
-  const addToFavorites = () => {
-    const favoriteAdded = [...favorites]
-    favoriteAdded.push(...favorites, specificPokemonData)
-    setFavorites(favoriteAdded)
-  }
+  // const addToFavorites = () => {
+  //   const favoriteAdded = [...favorites]
+  //   favoriteAdded.push(...favorites, specificPokemonData)
+  //   setFavorites(favoriteAdded)
+  // }
 
   if (!specificPokemonData) return null
 
@@ -81,7 +81,7 @@ const SpecificPokemon = () => {
           src={specificPokemonData.sprites.front_default}
         />
 
-        {
+        {/* {
           !(favorites.find((name: string) => name === specificPokemonData.name)) &&
           <Button
             my={2}
@@ -90,7 +90,7 @@ const SpecificPokemon = () => {
           >
             Favorite ⭐
           </Button>
-        }
+        } */}
 
       </Flex>
 
