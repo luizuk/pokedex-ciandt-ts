@@ -4,15 +4,10 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { DataContext } from "../contexts/DataProvider";
 
-// interface urlProp {
-//   url: string
-// }
-
 const SpecificPokemon = () => {
   const { favorites, setFavorites }: any = useContext(DataContext)
   const location = useLocation();
   const { url }: any = location.state;
-  console.log('url', url)
 
   const [specificPokemonData, setSpecificPokemonData] = useState<any>(null)
 
@@ -25,16 +20,7 @@ const SpecificPokemon = () => {
     getSpecificPokemon()
   }, [])
 
-  // const addToFavorites = () => {
-  //   const favoriteAdded = [...favorites]
-  //   favoriteAdded.push(...favorites, specificPokemonData)
-  //   setFavorites(favoriteAdded)
-  // }
-
   if (!specificPokemonData) return null
-
-  console.log('favorites', favorites)
-  // console.log('specificPokemonData', specificPokemonData)
 
   return (
     <Flex
@@ -80,18 +66,6 @@ const SpecificPokemon = () => {
           h={150}
           src={specificPokemonData.sprites.front_default}
         />
-
-        {/* {
-          !(favorites.find((name: string) => name === specificPokemonData.name)) &&
-          <Button
-            my={2}
-            bg={"gray.800"}
-            onClick={() => addToFavorites()}
-          >
-            Favorite ⭐
-          </Button>
-        } */}
-
       </Flex>
 
       <Flex
@@ -150,7 +124,6 @@ const SpecificPokemon = () => {
           }
         </SimpleGrid>
       </Flex>
-
     </Flex >
   )
 }

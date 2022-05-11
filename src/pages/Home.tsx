@@ -9,9 +9,6 @@ import { DataContext } from '../contexts/DataProvider'
 const Home = () => {
   const { allPokemons }: any = useContext(DataContext)
 
-  console.log("allPokemons", allPokemons)
-
-
   const links: { to: string, title: string }[] = [
     {
       to: '/search',
@@ -44,11 +41,6 @@ const Home = () => {
         p={2}
 
       >
-        {/* <SimpleGrid
-        columns={[2, 3, 3]}
-        spacing='20px'
-        alignItems={'center'}
-      > */}
         {
           links.map((link, index) => (
             <Link
@@ -77,8 +69,6 @@ const Home = () => {
             </Link>
           ))
         }
-
-        {/* </SimpleGrid> */}
 
       </Box >
     </Box>

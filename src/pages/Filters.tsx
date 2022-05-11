@@ -26,10 +26,6 @@ const Filters = () => {
   }
 
   if (!pokemonTypes) return null
-
-  console.log("pokeType", pokeTypeUrl)
-  console.log("foundedPokemons", foundedPokemons)
-
   return (
     <Box
       w={'100%'}

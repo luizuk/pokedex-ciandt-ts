@@ -8,8 +8,6 @@ import { DataContext } from '../contexts/DataProvider'
 
 const SearchByName = () => {
   const { allPokemons, setAllPokemons, allPokemonsAux }: any = useContext(DataContext)
-
-  console.log('allPokemonsAux', allPokemonsAux)
   const [pokemonName, setPokemonName] = useState("")
 
   useEffect(() => {
@@ -28,10 +26,6 @@ const SearchByName = () => {
       )
     }
   }, [pokemonName])
-
-  // if (!pokemonData) return null
-  // console.log('pokemonData', pokemonData)
-
 
   return (
     <Flex
@@ -52,7 +46,6 @@ const SearchByName = () => {
         </Text>
         <SearchBar
           liftSearchText={(text: string) => setPokemonName(text)}
-        // onClick={() => getPokemonByName()}
         />
 
         <SimpleGrid columns={[1, 2, 3]} spacing='20px' mt={2} >
@@ -78,20 +71,7 @@ const SearchByName = () => {
             ))
           }
         </SimpleGrid>
-
       </Box>
-
-      {/* <Box
-        w={['100%', '100%', '49%']}
-        height={"50px"}
-        bg={'red.800'}
-        rounded={'md'}
-        alignItems={'center'}
-        p={1}
-      >
-        Filters menu
-      </Box> */}
-
     </Flex >
   )
 }
